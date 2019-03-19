@@ -1,0 +1,1 @@
+New-AzureRmWebApp -Name chittiapp -AppServicePlan Chitti-ASP -ResourceGroupName chittirg -Location "eastus" 
