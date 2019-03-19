@@ -2,20 +2,20 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "sites_chittiapp_name": {
+        "sites_babuapp_name": {
             "defaultValue": "Appservicewithappsettings",
             "type": "String"
         },
-        "serverfarms_Chitti_ASP_name": {
-            "defaultValue": "Chitti-ASP",
+        "serverfarms_babu_ASP_name": {
+            "defaultValue": "babu-ASP",
             "type": "String"
         },
         "config_web_name": {
             "defaultValue": "web",
             "type": "String"
         },
-        "hostNameBindings_chittiapp.azurewebsites.net_name": {
-            "defaultValue": "chittiapp1.azurewebsites.net",
+        "hostNameBindings_babuapp.azurewebsites.net_name": {
+            "defaultValue": "babuapp1.azurewebsites.net",
             "type": "String"
         }
     },
@@ -31,12 +31,12 @@
                 "capacity": 1
             },
             "kind": "app",
-            "name": "[parameters('serverfarms_Chitti_ASP_name')]",
+            "name": "[parameters('serverfarms_babu_ASP_name')]",
             "apiVersion": "2016-09-01",
             "location": "East US",
             "scale": null,
             "properties": {
-                "name": "[parameters('serverfarms_Chitti_ASP_name')]",
+                "name": "[parameters('serverfarms_babu_ASP_name')]",
                 "workerTierName": null,
                 "adminSiteName": null,
                 "hostingEnvironmentProfile": null,
@@ -50,7 +50,7 @@
         {
             "type": "Microsoft.Web/sites",
             "kind": "app",
-            "name": "[parameters('sites_chittiapp_name')]",
+            "name": "[parameters('sites_babuapp_name')]",
             "apiVersion": "2016-08-01",
             "location": "East US",
             "scale": null,
@@ -58,7 +58,7 @@
                 "enabled": true,
                 "hostNameSslStates": [
                     {
-                        "name": "[concat(parameters('sites_chittiapp_name'),'.azurewebsites.net')]",
+                        "name": "[concat(parameters('sites_babuapp_name'),'.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "virtualIP": null,
                         "thumbprint": null,
@@ -66,7 +66,7 @@
                         "hostType": "Standard"
                     },
                     {
-                        "name": "[concat(parameters('sites_chittiapp_name'),'.scm.azurewebsites.net')]",
+                        "name": "[concat(parameters('sites_babuapp_name'),'.scm.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "virtualIP": null,
                         "thumbprint": null,
@@ -74,7 +74,7 @@
                         "hostType": "Repository"
                     }
                 ],
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_Chitti_ASP_name'))]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_babu_ASP_name'))]",
                 "reserved": false,
                 "siteConfig": null,
                 "scmSiteAlsoStopped": false,
@@ -88,12 +88,12 @@
                 "httpsOnly": false
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_Chitti_ASP_name'))]"
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_babu_ASP_name'))]"
             ]
         },
         {
             "type": "Microsoft.Web/sites/config",
-            "name": "[concat(parameters('sites_chittiapp_name'), '/', parameters('config_web_name'))]",
+            "name": "[concat(parameters('sites_babuapp_name'), '/', parameters('config_web_name'))]",
             "apiVersion": "2016-08-01",
             "location": "East US",
             "scale": null,
@@ -122,9 +122,9 @@
                 "httpLoggingEnabled": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "$chittiapp",
+                "publishingUsername": "$babuapp",
                 "publishingPassword": null,
-                "appSettings": { "Appsetting" : Appsetting},
+                "appSettings": { "Appsetting": "Appsetting"}
                 "azureStorageAccounts": {},
                 "metadata": null,
                 "connectionStrings": null,
@@ -206,22 +206,22 @@
                 "reservedInstanceCount": 0
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_chittiapp_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('sites_babuapp_name'))]"
             ]
         },
         {
             "type": "Microsoft.Web/sites/hostNameBindings",
-            "name": "[concat(parameters('sites_chittiapp_name'), '/', parameters('hostNameBindings_chittiapp.azurewebsites.net_name'))]",
+            "name": "[concat(parameters('sites_babuapp_name'), '/', parameters('hostNameBindings_babuapp.azurewebsites.net_name'))]",
             "apiVersion": "2016-08-01",
             "location": "East US",
             "scale": null,
             "properties": {
-                "siteName": "chittiapp",
+                "siteName": "babuapp",
                 "domainId": null,
                 "hostNameType": "Verified"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_chittiapp_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('sites_babuapp_name'))]"
             ]
         }
     ]
